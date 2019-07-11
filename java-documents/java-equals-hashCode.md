@@ -193,7 +193,9 @@ Book[id: 1, name: Effective Java]: 10
 
 **任何时候，如果覆写了对象`equals()`方法，就一定也要同时覆写对象的`hashCode()`方法！**
 
+<br /> <br /> <br />
+
 >**——————–【参考文章】——————–**
->1. Working With hashcode() and equals()
->2. 浅谈Java中的hashcode方法
->3. Java 中正确使用 hashCode 和 equals 方法
+>1. [Working With hashcode() and equals()](https://dzone.com/articles/working-with-hashcode-and-equals-in-java)
+>2. [浅谈Java中的hashcode方法](https://www.cnblogs.com/dolphin0520/p/3681042.html)
+>3. [Java 中正确使用 hashCode 和 equals 方法](https://www.oschina.net/question/82993_75533)
