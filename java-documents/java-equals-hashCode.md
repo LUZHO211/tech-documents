@@ -117,7 +117,7 @@ book2.hashCode(): 1058025095
 
 从上面测试结果看来，只要书本的`id`和`name`相同，我们自定义的对比机制已经能正确判断它们是同一本书；
 
-但是，由于我们仅覆写了`equals()`，并没有覆写`hashCode()`，那么我们这个比较机制在配合`HashMap`、`HashTable`以及H`ashSet`这些散列集合进行使用的时候，将不能正确得到预期的结果。
+但是，由于我们仅覆写了`equals()`，并没有覆写`hashCode()`，那么我们这个比较机制在配合`HashMap`、`HashTable`以及`HashSet`这些散列集合进行使用的时候，将不能正确得到预期的结果。
 
 >测试代码2如下：
 
@@ -193,7 +193,7 @@ Book[id: 1, name: Effective Java]: 10
 
 **任何时候，如果覆写了对象`equals()`方法，就一定也要同时覆写对象的`hashCode()`方法！**
 
-<br /> <br /> <br />
+<br /> <br />
 
 >**——————–【参考文章】——————–**
 >1. [Working With hashcode() and equals()](https://dzone.com/articles/working-with-hashcode-and-equals-in-java)
