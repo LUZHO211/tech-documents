@@ -7,8 +7,8 @@
 
 假设有两组密钥对：公司和github的，均存放在`.ssh`目录下：
 
->假设公司的`ssh`密钥对为：`company_id_rsa`和`company_id_rsa.pub`；
->个人在`github`上的`ssh`密钥对为：`github_id_rsa`和`github_id_rsa.pub`；
+>1. 公司的`ssh`密钥对为：`company_id_rsa`和`company_id_rsa.pub`；
+>2. 个人在`github`上的`ssh`密钥对为：`github_id_rsa`和`github_id_rsa.pub`；
 
 在`.ssh`目录下创建`config`文件，用于配置git的ssh-key
 
@@ -32,7 +32,7 @@ Host git.company.com
   IdentityFile ~/.ssh/company_id_rsa
 ```
 
->Host：
->HostName：仓库的域名，例如github.com
->PreferredAuthentications：认证方式：publickey
->IdentityFile：ssh私钥的路径
+>1. Host：主机标识
+>2. HostName：仓库的域名，例如github.com
+>3. PreferredAuthentications：认证方式：publickey
+>4. IdentityFile：ssh私钥的路径
