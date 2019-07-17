@@ -1,7 +1,7 @@
 # 如何配置多个Git ssh-key
 
 ## 1 背景
-有时候在同一个电脑上需要连接多个`git`远程仓库，例如公司的`gitlab`仓库和个人的的`github`仓库。由于每个`git`远程仓库都单独生成了自己的`id_rsa`和`id_rsa.pub`密钥对，我们需要告诉`git`管理工具该使用哪个`id_rsa`密钥来跟不同的远程仓库打交互认证。
+有时候在同一个电脑上需要连接多个`git`远程仓库，例如公司的`gitlab`仓库和个人的的`github`仓库。由于每个`git`远程仓库都单独生成了自己的`id_rsa`和`id_rsa.pub`密钥对，我们需要告诉`git`管理工具该使用哪个`id_rsa`密钥来跟不同的远程仓库进行认证。
 
 ## 2 多个ssh-key的配置
 
@@ -39,6 +39,8 @@ Host git.company.com
 
 <br /><br />
 
->------------【参考文章】------------
->1. [Git 最著名报错 “ERROR Permission to XXX git denied to user”终极解决方案](https://juejin.im/post/5c19f802f265da615d729791)
->2. [了解ssh代理：ssh-agent](http://www.zsythink.net/archives/2407/)
+>*参考文章*
+>
+>*1. [Git 最著名报错 “ERROR Permission to XXX git denied to user”终极解决方案](https://juejin.im/post/5c19f802f265da615d729791)*
+>
+>*2. [了解ssh代理：ssh-agent](http://www.zsythink.net/archives/2407/)*
