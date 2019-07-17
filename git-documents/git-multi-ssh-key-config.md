@@ -36,3 +36,9 @@ Host git.company.com
 >2. HostName：仓库的域名，例如github.com
 >3. PreferredAuthentications：认证方式：publickey
 >4. IdentityFile：ssh私钥的路径
+
+<br /><br />
+
+>------------【参考文章】------------
+>1. [Git 最著名报错 “ERROR Permission to XXX git denied to user”终极解决方案](https://juejin.im/post/5c19f802f265da615d729791)
+>2. [了解ssh代理：ssh-agent](http://www.zsythink.net/archives/2407/)
