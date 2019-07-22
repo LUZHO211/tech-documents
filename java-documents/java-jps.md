@@ -1,4 +1,5 @@
 # jps —— Java进程状态工具
+如果需要在`Linux`上查看`Java`进程的相关信息，通常使用`ps -ef | grep java`来查看；但是`JDK`也有相关的工具来查看`Java`进程信息：`jps`。
 
 jps（`Java Virtual Machine Process Status Tool`）是`JDK`自带的一个工具，用于查看`Java`进程的状态。例如列出系统中的所有`Java`进程、`Java`进程所用的`JVM`参数等等，可以协助我们进行`JVM`调优。
 
