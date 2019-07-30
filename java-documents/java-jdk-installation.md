@@ -15,7 +15,7 @@ $ mv jdk-8u221-linux-x64.tar.gz /usr/local/
 $ tar -zxvf jdk-8u221-linux-x64.tar.gz
 ```
 
-即，`JDK`的安装路径为：`/usr/local/jdk1.8.0_221`
+**即，`JDK`的安装路径为：`/usr/local/jdk1.8.0_221`，后面环境变量`JAVA_HOME`就是设置成`JDK`的安装路径。**
 
 ### 2 配置Java环境变量
 - 编辑`.bashrc`文件（`vim ~/.bashrc`），在文件的尾部追加以下内容：
