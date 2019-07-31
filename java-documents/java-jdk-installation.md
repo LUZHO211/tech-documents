@@ -79,7 +79,7 @@ Matching Java Virtual Machines (1):
 
 /Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home
 ```
-**`/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home`**就是`JDK`的安装目录，后面配置`JAVA_HOME`环境变量会使用到。
+**`/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home`就是`JDK`的安装目录，后面配置`JAVA_HOME`环境变量会使用到。**
 
 - 在用户主目录下（`cd ~/`），编辑`.bash_profile`文件（没有就新建一个），在文件中加入以下内容：
 ```bash
