@@ -1,5 +1,5 @@
 ## 1 Windows系统安装JDK
-- **本文使用`Windows 10`系统版本来做演示。**
+- **本文使用`Windows 10`系统版本来做演示；`JDK`版本为`1.8.0_221`。**
 
 ### 1.1 下载并安装JDK
 - 到[Oracle官网](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)下载适合自己系统的`JDK`版本，本文将使用`jdk-8u221-windows-x64.exe`这个版本来做演示。
@@ -9,7 +9,7 @@
 
 
 ## 2 Linux系统安装JDK
-- **本文使用`Ubuntu 16.04.6 LTS`系统版本来做演示。**
+- **本文使用`Ubuntu 16.04.6 LTS`系统版本来做演示；`JDK`版本为`1.8.0_221`。**
 
 ### 2.1 下载并解压（安装）JDK
 - 到[Oracle官网](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)下载适合自己系统的`JDK`版本，本文将使用`jdk-8u221-linux-x64.tar.gz`这个版本来做演示。
@@ -32,7 +32,6 @@ $ tar -zxvf jdk-8u221-linux-x64.tar.gz
 
 ```bash
 export JAVA_HOME=/usr/local/jdk1.8.0_221
-export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
@@ -65,7 +64,7 @@ where possible options include:
 **出现以上信息说明成功安装`JDK`并且环境变量配置正确。否则需要检查环境变量的配置是否正确。**
 
 ## 3 Mac OS系统安装JDK
-- **本文使用`macOS Mojave 10.14.6`系统版本来做演示。**
+- **本文使用`macOS Mojave 10.14.6`系统版本来做演示；`JDK`版本为`1.8.0_221`。**
 
 ### 3.1 下载并安装JDK
 - 到[Oracle官网](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)下载适合自己系统的`JDK`版本，本文将使用`jdk-8u221-macosx-x64.dmg`这个版本来做演示。
@@ -88,11 +87,9 @@ Matching Java Virtual Machines (1):
 
 ```bash
 JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home
-CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
 PATH=$JAVA_HOME/bin:$PATH:.
 
 export JAVA_HOME
-export CLASSPATH
 export PATH
 ```
 
@@ -123,3 +120,14 @@ where possible options include:
 ```
 
 **出现以上信息说明成功安装`JDK`并且环境变量配置正确。否则需要检查环境变量的配置是否正确。**
+
+## 4 CLASSPATH环境变量
+**`JDK 1.5版本`之后，不需要再设置`CLASSPATH`环境变量。**
+
+- `CLASSPATH`环境变量作用在于告诉`JER`在运行`Java`程序时，该去哪里搜索程序所依赖的`JDK`类库。`JDK 1.5版本`之后已经不需要再设置`CLASSPATH`环境变量了，`JRE`会自动找到类库路径。
+- 但是对于我们自己写的一些简单测试程序，可以通过`-classpath`或者`-cp`来指定依赖的其他第三方库的路径：
+有一个`Test.java`类，`javac Test.java`编译之后执行：
+
+```bash
+$ java -classpath ~/lib;./fastjson-1.2.58.jar Test
+```
