@@ -45,22 +45,6 @@ Java(TM) SE Runtime Environment (build 1.8.0_221-b11)
 Java HotSpot(TM) 64-Bit Server VM (build 25.221-b11, mixed mode)
 ```
 
-```bash
-$ javac
-Usage: javac <options> <source files>
-where possible options include:
-  -g                         Generate all debugging info
-  -g:none                    Generate no debugging info
-  -g:{lines,vars,source}     Generate only some debugging info
-  -nowarn                    Generate no warnings
-  -verbose                   Output messages about what the compiler is doing
-  -deprecation               Output source locations where deprecated APIs are used
-  -classpath <path>          Specify where to find user class files and annotation processors
-  -cp <path>                 Specify where to find user class files and annotation processors
-
-··· ···
-```
-
 **出现以上信息说明成功安装`JDK`并且环境变量配置正确。否则需要检查环境变量的配置是否正确。**
 
 ## 3 Mac OS系统安装JDK
@@ -101,22 +85,6 @@ $ java -verion
 java version "1.8.0_221"
 Java(TM) SE Runtime Environment (build 1.8.0_221-b11)
 Java HotSpot(TM) 64-Bit Server VM (build 25.221-b11, mixed mode)
-```
-
-```bash
-$ javac
-Usage: javac <options> <source files>
-where possible options include:
-  -g                         Generate all debugging info
-  -g:none                    Generate no debugging info
-  -g:{lines,vars,source}     Generate only some debugging info
-  -nowarn                    Generate no warnings
-  -verbose                   Output messages about what the compiler is doing
-  -deprecation               Output source locations where deprecated APIs are used
-  -classpath <path>          Specify where to find user class files and annotation processors
-  -cp <path>                 Specify where to find user class files and annotation processors
-
-··· ···
 ```
 
 **出现以上信息说明成功安装`JDK`并且环境变量配置正确。否则需要检查环境变量的配置是否正确。**
