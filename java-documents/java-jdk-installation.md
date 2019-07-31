@@ -25,7 +25,7 @@ $ tar -zxvf jdk-8u221-linux-x64.tar.gz
 **即，`JDK`的安装路径为：`/usr/local/jdk1.8.0_221`，后面环境变量`JAVA_HOME`就是设置成`JDK`的安装路径。**
 
 ### 2.2 配置Java环境变量
-- 编辑`.bashrc`文件（`vim ~/.bashrc`），在文件的尾部追加以下内容：
+- 在用户主目录下编辑`.bashrc`文件（`vim ~/.bashrc`），在文件尾部追加以下内容：
 ```bash
 export JAVA_HOME=/usr/local/jdk1.8.0_221
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
@@ -81,7 +81,7 @@ Matching Java Virtual Machines (1):
 ```
 **`/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home`就是`JDK`的安装目录，后面配置`JAVA_HOME`环境变量会使用到。**
 
-- 在用户主目录下（`cd ~/`），编辑`.bash_profile`文件（没有就新建一个），在文件中加入以下内容：
+- 在用户主目录下编辑`.bash_profile`文件（`vim ~/.bash_profile`），在文件中加入以下内容：
 ```bash
 JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home
 CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
