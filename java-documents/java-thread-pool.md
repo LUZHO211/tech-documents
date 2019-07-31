@@ -1,0 +1,55 @@
+## Java线程池技术
+在应用程序中恰当地使用**多线程技术**可以充分发挥多核`CPU`的优势，极大地提升应用处理业务的效率。应该**始终使用线程池**来创建、管理线程，而不是在程序中显式地使用`new Thread(Runnable)`的方式来创建线程，**因为使用线程池可以对线程进行统一管理：创建、销毁线程开销较大，线程池可以对线程池中的线程进行复用，无需反复创建和销毁线程。**
+
+`Java`创建线程池的类应该是`java.util.concurrent.ThreadPoolExecutor`类；当然`Java`提供了`java.util.concurrent.Executors`工具类来帮助我们快速创建各种定义好的线程池：`FixedThreadPool`、`SingleThreadPool`、`CachedThreadPool`以及`ScheduledThreadPool`这四种线程池（这些线程池本质上也是对`ThreadPoolExecutor`进行封装）。
+
+- `Executors.newFixedThreadPool(int nThreads)`：创建一个固定数量线程的线程池，池中的线程数量会始终保持不变。
+
+```java
+public static ExecutorService newFixedThreadPool(int nThreads) {
+    return new ThreadPoolExecutor(nThreads, nThreads,
+                                  0L, TimeUnit.MILLISECONDS,
+                                  new LinkedBlockingQueue<Runnable>());
+}
+```
+
+`newFixedThreadPool`实际上就是封装了`ThreadPoolExecutor`：将核心线程数（`corePoolSize`）和（`maximumPoolSize`）参数设置一样，来保证池中的线程数量；如果池中有线程挂掉了，会自动启动新的线程来补上。
+
+- `Executors.newSingleThreadExecutor()`：创建一个只包含单个线程的线程池，可以保证所有任务按始终被单一的一个线程串行地执行。
+
+```java
+public static ExecutorService newSingleThreadExecutor() {
+    return new FinalizableDelegatedExecutorService
+        (new ThreadPoolExecutor(1, 1,
+                                0L, TimeUnit.MILLISECONDS,
+                                new LinkedBlockingQueue<Runnable>()));
+}
+```
+
+- `Executors.newCachedThreadPool()`：创建一个会根据任务按需地创建、回收线程的线程池。这种类型线程池适合执行数量多、耗时少的任务。
+
+```java
+public static ExecutorService newCachedThreadPool() {
+    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                  60L, TimeUnit.SECONDS,
+                                  new SynchronousQueue<Runnable>());
+}
+```
+
+- `Executors.newScheduledThreadPool(int corePoolSize)`：创建一个具有定时功能的线程池，适用于执行定时任务。
+
+```java
+public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
+    return new ScheduledThreadPoolExecutor(corePoolSize);
+}
+
+public ScheduledThreadPoolExecutor(int corePoolSize) {
+    super(corePoolSize, Integer.MAX_VALUE, 0, NANOSECONDS,
+          new DelayedWorkQueue());
+}
+```
+
+以上四种定义好的线程池在某些场景确实很方便我们的使用，但是我们需要根据自己的使用场景，有所保留地使用它们，因为如果盲目使用可能会导致隐患，例如以下问题：
+
+- `FixedThreadPool`和`SingleThreadPool`所允许的工作队列最大容量为`Integer.MAX_VALUE`，这有可能会随着工作队列中的任务堆积而导致`OOM`；
+- `CachedThreadPool`和`ScheduledThreadPool`所允许创建的线程数量为`Integer.MAX_VALUE`，这也有可能因为创建大量线程导致`OOM`或者线程切换开销巨大。
