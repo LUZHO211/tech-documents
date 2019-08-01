@@ -6,6 +6,8 @@
 
 可以说，`DelayQueue`是一个基于优先队列（`PriorityQueue`）实现的阻塞队列（`BlockingQueue`），队列中的消息的优先级是根据消息的`TTL`时间来决定的。
 
+**`DelayQueue`已经为我们解决了并发的线程安全问题，我们可以直接在多线程环境并发操作`DelayQueue`。**
+
 ## 2 DelayQueue的使用
 
 先说两个接口：`java.util.concurrent.Delayed`接口和`java.lang.Comparable`接口。
@@ -53,11 +55,11 @@ public class DelayMessage implements Delayed {
 
     /**
      * 构造函数
-     * @param message 消息实体
+     * @param message 任务数据
      * @param ttl 延迟时间，单位毫秒
      */
     public DelayMessage(String message, long ttl) {
-        setMessage(message);
+        this.message = message;
         this.ttl = System.currentTimeMillis() + ttl;
     }
 
@@ -73,14 +75,6 @@ public class DelayMessage implements Delayed {
     public int compareTo(Delayed o) {
         // 比较、排序：对任务的延时大小进行排序，将延时时间最小的任务放到队列头部
         return (int) (this.getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS));
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
 }
