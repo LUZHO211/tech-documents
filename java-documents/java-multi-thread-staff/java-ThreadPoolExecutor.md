@@ -65,7 +65,7 @@ threadPoolExecutor.prestartAllCoreThreads();
 ```
 
 ## 2 线程池阻塞队列
-`Java`线程池使用阻塞队列（`BlockingQueue`）作为线程池的工作队列，可以直接应用在多线程并发的环境下缓存线程任务。
+`Java`使用阻塞队列（`BlockingQueue`）作为线程池的工作队列，可以直接应用在多线程并发的环境下缓存线程任务。
 
 **如果阻塞队列（`BlockingQueue`）为空（`empty`），则尝试从队列中获取（读取）任务的线程会被阻塞；如果阻塞队列（`BlockingQueue`）满了（`full`），则尝试往队列中插入任务的线程会被阻塞。**
 
@@ -89,9 +89,23 @@ threadPoolExecutor.prestartAllCoreThreads();
 |`DelayQueue`|一个使用优先级队列实现的**无界**阻塞队列。用于处理延迟任务。|
 
 ## 3 线程池拒绝策略
+`ThreadPoolExecutor`内置了四种拒绝策略：
+
+- `ThreadPoolExecutor.AbortPolicy`：取消策略，丢弃任务并抛出`RejectedExecutionException`，**默认的拒绝策略**。
+- `ThreadPoolExecutor.DiscardPolicy`：丢弃策略，丢弃任务但是不会抛出任何异常。
+- `ThreadPoolExecutor.DiscardOldestPolicy`：丢弃策略，丢弃队列头部的任务（`oldest unhandled request`）并重新尝试执行所提交的任务。
+- `hreadPoolExecutor.CallerRunsPolicy`：调用者执行策略，将任务直接给提交该任务的线程来处理。
+
+以上四种拒绝策略是`ThreadPoolExecutor`内置的，对于被拒绝的任务处理比较简单。当然，我们也可以根据我们的需求场景来继承这些策略类或者直接实现`RejectedExecutionHandler`接口来达到我们更复杂的拒绝策略。
 
 ## 4 线程池内部处理逻辑（流程）
+>**重点理解线程池的内部处理逻辑（流程）。**
 
+- 当线程池中的线程数量**小于**核心线程数：新提交一个任务时，无论是否存在空闲的线程，线程池都将新建一个新的线程来执行新任务；
+- 当线程池中的线程数量**等于**核心线程数（核心线程已满）：新提交的任务会被存储到工作队列中，等待空闲线程来执行，**而不会创建新线程**；
+- 当工作队列已满，并且池中的线程数量**小于**最大线程数（`maximumPoolSize`）：如果继续提交新的任务，线程池会创建新线程来处理任务；
+- 当工作队列已满，并且池中线程数量已达到最大值：继续提交新任务时，线程池会触发拒绝策略处理逻辑；
+- 如果线程池中存在空闲的线程并且其空闲时间达到了`keepAliveTime`的限定，线程池会回收这些空闲线程，但是线程池不会回收空闲的核心线程（若设置了`allowCoreThreadTimeOut`参数为`true`，核心线程也会被回收）。
 
 ## 5 Executors
 `Java`提供了`java.util.concurrent.Executors`这个工具类来帮助开发者快速创建定义好的四种线程池：`FixedThreadPool`、`SingleThreadPool`、`CachedThreadPool`以及`ScheduledThreadPool`。
