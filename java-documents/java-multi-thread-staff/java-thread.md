@@ -1,0 +1,5 @@
+# Java的线程
+
+```bash
+NEW -> RUNNABLE -> BLOCKED -> WAITING -> TIMED_WATING -> TERMINATED
+```
