@@ -67,7 +67,6 @@ threadPoolExecutor.prestartAllCoreThreads();
 ## 2 线程池阻塞队列
 `Java`线程池使用阻塞队列（`BlockingQueue`）作为线程池的工作队列，可以直接应用在多线程并发的环境下缓存线程任务。
 
-#### 阻塞队列特性
 **如果阻塞队列（`BlockingQueue`）为空（`empty`），则尝试从队列中获取（读取）任务的线程会被阻塞；如果阻塞队列（`BlockingQueue`）满了（`full`），则尝试往队列中插入任务的线程会被阻塞。**
 
 阻塞队列`java.util.concurrent.BlockingQueue`是一个接口，这个接口类中定义的四种类型的方法，分别会在无法完成写入、读取元素等队列操作的情况下作出不同的反应：
