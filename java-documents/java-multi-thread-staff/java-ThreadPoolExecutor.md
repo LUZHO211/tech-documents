@@ -72,7 +72,7 @@ threadPoolExecutor.prestartAllCoreThreads();
 
 阻塞队列`java.util.concurrent.BlockingQueue`是一个接口，这个接口类中定义的四种类型的方法，分别会在无法完成写入、读取元素等队列操作的情况下作出不同的反应：
 
-|操作类型|抛异常（`Throws exception`）|返回特定值（`Special value`）|阻塞（`Blocks`）|超时（`Times out`）|
+|操作类型|直接抛异常|返回特定值|一直阻塞|超时退出|
 |:---|:---|:---|:---|:---|
 |插入元素（`Insert`）|`add(e)`|`offer(e)`|`put(e)`|`offer(e, time, unit)`|
 |删除元素（`Remove`）|`remove()`|`poll()`|`take()`|`poll(time, unit)`|
