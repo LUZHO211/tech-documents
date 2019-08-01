@@ -50,7 +50,61 @@ public ThreadPoolExecutor(int corePoolSize,
 
 **但是如果显式调用了`prestartAllCoreThreads()`方法或者`prestartCoreThread()`方法，会立即创建核心线程。**
 
+```java
+ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+                corePoolSize,
+                maximumPoolSize,
+                keepAliveTime,
+                TimeUnit.SECONDS,
+                workQueue,
+                threadFactory,
+                rejectedExecutionHandler);
+
+// 调用prestartAllCoreThreads()来立即创建所有核心线程
+threadPoolExecutor.prestartAllCoreThreads();
+```
+
 ## 2 线程池阻塞队列
 
 
 ## 3 线程池拒绝策略
+
+## 4 线程池内部处理逻辑
+
+
+## 5 Executors
+`Java`提供了`java.util.concurrent.Executors`这个工具类来帮助开发者快速创建定义好的四种线程池：`FixedThreadPool`、`SingleThreadPool`、`CachedThreadPool`以及`ScheduledThreadPool`。
+
+- `Executors.newFixedThreadPool(int nThreads)`：创建一个固定数量线程的线程池，池中的线程数量**达到最大值后会始终保持不变**。
+- `Executors.newSingleThreadExecutor()`：创建一个只包含单个线程的线程池，可以保证所有任务按提交的顺序被单一的一个线程串行地执行。
+- `Executors.newCachedThreadPool()`：创建一个会根据任务按需地创建、回收线程的线程池。这种类型线程池适合执行数量多、耗时少的任务。
+- `Executors.newScheduledThreadPool(int corePoolSize)`：创建一个具有定时功能的线程池，适用于执行定时任务。
+
+**这些线程池本质上是对`ThreadPoolExecutor`进行封装，请往下看。**
+
+#### newFixedThreadPool
+
+```java
+new ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+```
+
+#### newSingleThreadExecutor
+
+```java
+new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+```
+
+#### newCachedThreadPool
+
+```java
+new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+```
+
+### 提醒的方面
+以上四种定义好的线程池在某些场景确实很方便我们的使用，但是我们需要了解它们的隐患之处：
+
+- `FixedThreadPool`和`SingleThreadPool`所允许的工作队列最大容量为`Integer.MAX_VALUE`，这有可能会随着工作队列中的任务堆积而导致`OOM`；
+- `CachedThreadPool`和`ScheduledThreadPool`所允许创建的线程数量为`Integer.MAX_VALUE`，这也有可能因为创建大量线程导致`OOM`或者线程切换开销巨大。
+
+最好还是熟悉`ThreadPoolExecutor`的原理和用法，在`Java`提供的四种线程池不能满足需求，或者想把控整个线程池的情况下，可以自己使用`ThreadPoolExecutor`类来构建自定义的线程池。
+
