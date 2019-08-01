@@ -65,11 +65,33 @@ threadPoolExecutor.prestartAllCoreThreads();
 ```
 
 ## 2 线程池阻塞队列
+`Java`线程池使用阻塞队列（`BlockingQueue`）作为线程池的工作队列，可以直接应用在多线程并发的环境下缓存线程任务。
 
+#### 阻塞队列特性
+**如果阻塞队列（`BlockingQueue`）为空（`empty`），则尝试从队列中获取（读取）任务的线程会被阻塞；如果阻塞队列（`BlockingQueue`）满了（`full`），则尝试往队列中插入任务的线程会被阻塞。**
+
+阻塞队列`java.util.concurrent.BlockingQueue`是一个接口，这个接口类中定义的四种类型的方法，分别会在无法完成写入、读取元素等队列操作的情况下作出不同的反应：
+
+|操作类型|抛异常（`Throws exception`）|返回特定值（`Special value`）|阻塞（`Blocks`）|超时（`Times out`）|
+|:---|:---|:---|:---|
+|插入元素（`Insert`）|`add(e)`|`offer(e)`|`put(e)`|`offer(e, time, unit)`|
+|删除元素（`Remove`）|`remove()`|`poll()`|`take()`|`poll(time, unit)`|
+|检查（`Examine`）|`element()`|`peek()`|`not applicable`|`not applicable`|
+
+
+阻塞队列（`BlockingQueue`）在`JDK`实现类中的常用几个如下说明：
+
+|阻塞队列实现类|阻塞队列说明|
+|:---|:---|
+|`ArrayBlockingQueue`|一个基于数组结构的**有界**阻塞队列。|
+|`LinkedBlockingQueue`|一个基于链表结构的**有界**阻塞队列。|
+|`SynchronousQueue`|一个不存储任何元素的阻塞队列。一个线程的插入操作必须等待另一个线程来读取才能完成，才会允许下一个插入操作。`CachedThreadPool`用的就是这个队列，所以向线程池中提交任务就会新建一个或分配一个空闲的线程来处理任务，因为`SynchronousQueue`不会存储任何元素。|
+|`PriorityBlockingQueue`|一个支持优先级排序的**无界**阻塞队列。|
+|`DelayQueue`|一个使用优先级队列实现的**无界**阻塞队列。用于处理延迟任务。|
 
 ## 3 线程池拒绝策略
 
-## 4 线程池内部处理逻辑
+## 4 线程池内部处理逻辑（流程）
 
 
 ## 5 Executors
@@ -80,7 +102,7 @@ threadPoolExecutor.prestartAllCoreThreads();
 - `Executors.newCachedThreadPool()`：创建一个会根据任务按需地创建、回收线程的线程池。这种类型线程池适合执行数量多、耗时少的任务。
 - `Executors.newScheduledThreadPool(int corePoolSize)`：创建一个具有定时功能的线程池，适用于执行定时任务。
 
-**这些线程池本质上是对`ThreadPoolExecutor`进行封装，请往下看。**
+>**这些线程池本质上是对`ThreadPoolExecutor`进行封装，请往下看。**
 
 #### newFixedThreadPool
 
@@ -100,7 +122,15 @@ new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<
 new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 ```
 
-### 提醒的方面
+#### 
+```java
+new ScheduledThreadPoolExecutor(corePoolSize);
+
+public ScheduledThreadPoolExecutor(int corePoolSize) {
+    super(corePoolSize, Integer.MAX_VALUE, 0, NANOSECONDS, new DelayedWorkQueue());
+}
+```
+
 以上四种定义好的线程池在某些场景确实很方便我们的使用，但是我们需要了解它们的隐患之处：
 
 - `FixedThreadPool`和`SingleThreadPool`所允许的工作队列最大容量为`Integer.MAX_VALUE`，这有可能会随着工作队列中的任务堆积而导致`OOM`；
