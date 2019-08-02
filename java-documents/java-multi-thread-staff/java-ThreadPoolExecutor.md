@@ -105,7 +105,38 @@ threadPoolExecutor.prestartAllCoreThreads();
 - 当工作队列已满，并且池中线程数量已达到最大值：继续提交新任务时，线程池会触发拒绝策略处理逻辑；
 - 如果线程池中存在空闲的线程并且其空闲时间达到了`keepAliveTime`参数的限定值，线程池会回收这些空闲线程，但是线程池不会回收空闲的核心线程（若设置了`allowCoreThreadTimeOut`参数为`true`，核心线程也会被回收）。
 
-## 5 Executors
+## 5 execute & submit
+向线程池中提交线程任务有两种方式：调用`execute`方法或者调用`submit`。
+
+- **`execute`方法**：定义在`java.util.concurrent.Executor`接口中
+
+```java
+void execute(Runnable command);
+```
+
+- **`submit`方法**：定义在`java.util.concurrent.ExecutorService`接口中
+
+```java
+<T> Future<T> submit(Callable<T> task);
+
+Future<?> submit(Runnable task);
+
+<T> Future<T> submit(Runnable task, T result);
+
+public Future<?> submit(Runnable task) {
+    if (task == null) throw new NullPointerException();
+    RunnableFuture<Void> ftask = newTaskFor(task, null);
+    execute(ftask);
+    return ftask;
+}
+```
+
+- `submit`方法只是将线程任务封装成一个`FutureTask`，最终还是调用`execute`方法来执行任务。
+- `submit`方法会返回一个`Future`，通过调用`Future.get()`方法可以获取到任务的执行结果；`execute`方法返回`void`，无法获取任务执行结果。
+- 若提交的线程任务里面抛出异常：`execute`会直接将异常抛出并退出线程；`submit`会**"吞掉"异常**，并在`Future.get()`的时候将异常抛出。
+
+
+## 6 Executors
 `Java`提供了`java.util.concurrent.Executors`这个工具类来帮助开发者快速创建定义好的四种线程池：`FixedThreadPool`、`SingleThreadPool`、`CachedThreadPool`以及`ScheduledThreadPool`。
 
 - `Executors.newFixedThreadPool(int nThreads)`：创建一个固定数量线程的线程池，池中的线程数量**达到最大值后会始终保持不变**。
@@ -133,7 +164,8 @@ new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<
 new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 ```
 
-#### 
+#### newScheduledThreadPool
+
 ```java
 new ScheduledThreadPoolExecutor(corePoolSize);
 
