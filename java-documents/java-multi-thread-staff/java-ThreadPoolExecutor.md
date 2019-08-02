@@ -117,12 +117,7 @@ void execute(Runnable command);
 - **`submit`方法**：定义在`java.util.concurrent.ExecutorService`接口中
 
 ```java
-<T> Future<T> submit(Callable<T> task);
-
-Future<?> submit(Runnable task);
-
-<T> Future<T> submit(Runnable task, T result);
-
+// submit方法定义有三个，参数和返回值不一样而已：这里只贴出其中一个方法的实现
 public Future<?> submit(Runnable task) {
     if (task == null) throw new NullPointerException();
     RunnableFuture<Void> ftask = newTaskFor(task, null);
@@ -133,7 +128,7 @@ public Future<?> submit(Runnable task) {
 
 - `submit`方法只是将线程任务封装成一个`FutureTask`，最终还是调用`execute`方法来执行任务。
 - `submit`方法会返回一个`Future`，通过调用`Future.get()`方法可以获取到任务的执行结果；`execute`方法返回`void`，无法获取任务执行结果。
-- 若提交的线程任务里面抛出异常：`execute`会直接将异常抛出并退出线程；`submit`会**"吞掉"异常**，并在`Future.get()`的时候将异常抛出。
+- 若提交的线程任务里面抛出异常：`execute`会直接将异常抛出并退出线程；`submit`会**吞掉异常**，并在`Future.get()`的时候将异常抛出。
 
 
 ## 6 Executors
