@@ -106,7 +106,7 @@ threadPoolExecutor.prestartAllCoreThreads();
 - 如果线程池中存在空闲的线程并且其空闲时间达到了`keepAliveTime`参数的限定值，线程池会回收这些空闲线程，但是线程池不会回收空闲的核心线程（若设置了`allowCoreThreadTimeOut`参数为`true`，核心线程也会被回收）。
 
 ## 5 execute & submit
-向线程池中提交线程任务有两种方式：调用`execute`方法或者调用`submit`。
+向线程池中提交线程任务有两种方式：调用`execute`方法或者调用`submit`方法。
 
 - **`execute`方法**：定义在`java.util.concurrent.Executor`接口中
 
