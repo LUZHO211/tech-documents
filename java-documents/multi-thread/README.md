@@ -1,2 +1,2 @@
-# java-multi-thread-staff
+# multi-thread
 该目录用于归类`Java`线程（多线程）相关的学习总结文章。
