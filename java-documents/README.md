@@ -89,7 +89,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.221-b11, mixed mode)
 
 **出现以上信息说明成功安装`JDK`并且环境变量配置正确。否则需要检查环境变量的配置是否正确。**
 
-## 4 CLASSPATH环境变量
+## 4 关于CLASSPATH环境变量
 **`JDK 1.5版本`之后，不需要再设置`CLASSPATH`环境变量。**
 
 - `CLASSPATH`环境变量作用在于告诉`JER`在运行`Java`程序时，该去哪里搜索程序所依赖的`JDK`类库。`JDK 1.5版本`之后已经不需要再设置`CLASSPATH`环境变量了，`JRE`会自动找到类库路径。
