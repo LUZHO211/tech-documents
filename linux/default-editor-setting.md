@@ -20,7 +20,7 @@ export EDITOR=/usr/bin/vim
 $ update-alternatives --config editor
 ```
 
-然后会出现各种编辑器的列表，让你选择。选一个你钟意的编辑器即可：
+然后会出现各种编辑器的列表，让你选择。选一个你钟意:sparkling_heart:的编辑器即可：
 
 ```bash
 There are 4 choices for the alternative editor (providing /usr/bin/editor).
@@ -42,7 +42,7 @@ Press <enter> to keep the current choice[*], or type selection number:
 $ select-editor
 ```
 
-同样的，会出现各种编辑器的列表，让你选择。选一个你钟意的编辑器即可：
+同样的，会出现各种编辑器的列表，让你选择。选一个你钟意:sparkling_heart:的编辑器即可：
 
 ```bash
 Select an editor.  To change later, run 'select-editor'.
