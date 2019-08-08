@@ -63,10 +63,10 @@ $ printf "99.999%%\n"
 - 简单的表格
 
 ```bash
-$ printf "%-10s %-10s %-10s %-10s\n" USER PID 内存使用 CPU使用率 luzho211 2341 10.12% 45.00% mumu 8931 12.19% 99.00%
-USER       PID        内存使用 CPU使用率
-luzho211   2341       10.12%     45.00%    
-mumu       8931       12.19%     99.00% 
+$ printf "%-10s %-10s %-20s %-10s\n" USER PID Memory-Usage CPU-Usage luzho211 2341 10.12% 45.00% mumu 8931 12.19% 99.00%
+USER       PID        Memory-Usage         CPU-Usage 
+luzho211   2341       10.12%               45.00%    
+mumu       8931       12.19%               99.00%
 ```
 
 `%-10s`：符号`-`表示左对齐，`10`表示输出的字符串所占长度，不够会用空格填补。
