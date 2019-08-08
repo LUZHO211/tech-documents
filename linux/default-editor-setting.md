@@ -33,7 +33,7 @@ There are 4 choices for the alternative editor (providing /usr/bin/editor).
   3            /usr/bin/vim.basic   30        manual mode
 * 4            /usr/bin/vim.tiny    10        manual mode
 
-Press <enter> to keep the current choice[*], or type selection number: 
+Press <enter> to keep the current choice[*], or type selection number: 4
 ```
 
 如果这个命令设置完成后还是没有改过来，那么再运行下面的命令：
@@ -51,5 +51,5 @@ Select an editor.  To change later, run 'select-editor'.
   3. /usr/bin/vim.basic
   4. /usr/bin/vim.tiny
 
-Choose 1-4 [2]:
+Choose 1-4 [2]: 4
 ```
