@@ -1,5 +1,5 @@
 # jstack：Java线程栈分析工具
-jstack是JVM自带的一种线程堆栈跟踪工具。可以使用jstack打印JVM进程中的线程堆栈的快照信息。
+`jstack`是`JVM`自带的一种线程堆栈跟踪工具。可以使用jstack打印JVM进程中的线程堆栈的快照信息。
 
 ```bash
 Usage:
@@ -55,5 +55,5 @@ Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.211-b12 mixed mode):
 - 或者将线程栈快照信息保存到文件中，便于分析：
 
 ```bash
-$ jstack -l 3660 > stack-3660.
+$ jstack -l 3660 > thread-stack.log
 ```
