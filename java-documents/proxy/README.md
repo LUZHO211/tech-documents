@@ -100,7 +100,7 @@ public class Launcher {
 }
 ```
 
-测试静态代理所属楚的日志为：
+测试静态代理所输出的日志为：
 
 ```java
 16:27:46.215 [main] INFO com.luzho211.proxy.HangzhouTicketOffice - Hangzhou ticket office selling a ticket ...
